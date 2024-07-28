@@ -8,7 +8,11 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true, //* Elimina "silenciosamente" las propiedades que no estén en el DTO. Previene la contaminación de objetos con datos innecesarios o maliciosos
-      forbidNonWhitelisted: true  //* Dispara una excepción en caso de venir propiedades no definidas en el DTO. Actúa antes que el whitelist
+      forbidNonWhitelisted: true,  //* Dispara una excepción en caso de venir propiedades no definidas en el DTO. Actúa antes que el whitelist
+      transform: true, //* Los datos de entrada se conviertan en una instancia del DTO, permitiendo así trabajar con una instancia de la clase con todas sus propiedades y métodos.
+      transformOptions: {
+        enableImplicitConversion: true //* Convierte cadenas a tipos primitivos automáticamente durante el proceso de transformación.
+      }
     })
   );
 
